@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AddToCartButton } from "@/components/AddToCartButton";
 import { ProductCard } from "@/components/ProductCard";
 import { catalogCategories, catalogProducts, getProduct } from "@/lib/catalog";
 import { formatPrice, shop, whatsappLink } from "@/lib/shop";
@@ -56,19 +55,21 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <p className="pb-1 text-sm uppercase tracking-wider text-muted">/ {product.unit}</p>
           </div>
           <p className="mt-2 text-xs text-muted">{shop.priceDisclaimer}</p>
-          <div className="mt-8">
-            <AddToCartButton product={product} />
-          </div>
           <a
-            href={whatsappLink(`Namaste, I would like to order ${product.name}.`)}
-            className="mt-4 inline-flex text-sm font-semibold text-maroon hover:text-gold"
+            href={whatsappLink(`Namaste, I would like to enquire about ${product.name}. Please share availability and the current price.`)}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-8 inline-flex h-12 items-center rounded-md bg-maroon px-6 text-sm font-semibold text-ivory hover:bg-maroon-soft"
           >
-            Or WhatsApp this item →
+            Enquire on WhatsApp
           </a>
+          <p className="mt-3 text-xs text-muted">
+            This opens a WhatsApp chat with the shop. Your enquiry is not an order until the shop confirms it.
+          </p>
           <ul className="mt-8 space-y-2 text-sm text-muted">
             <li>Vegetarian · made fresh at the Mangolpuri counter</li>
             <li>Sold by {product.unit.toLowerCase()} · packed the same day</li>
-            <li>Call {shop.phoneDisplay} for bulk or festive orders</li>
+            <li>Call {shop.phoneDisplay} for bulk or festive enquiries</li>
           </ul>
         </div>
       </div>
