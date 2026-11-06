@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useCart } from "@/components/CartProvider";
-import { shop, telLink } from "@/lib/shop";
+import { shop, telLink, whatsappLink } from "@/lib/shop";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,7 +13,6 @@ const links = [
 ];
 
 export function Header() {
-  const { count } = useCart();
   const [open, setOpen] = useState(false);
 
   return (
@@ -50,28 +48,26 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link
-              href="/cart"
-              className="relative rounded-full border border-white/15 px-3 py-2 text-sm text-ivory hover:border-gold hover:text-gold"
+            <a
+              href={whatsappLink("Namaste, I would like to enquire about your sweets and snacks.")}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-md bg-gold px-4 py-2 text-sm font-semibold text-maroon-deep shadow-sm hover:bg-gold-bright"
             >
-              Cart
-              {count > 0 ? (
-                <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-gold px-1 text-[10px] font-bold text-maroon-deep">
-                  {count}
-                </span>
-              ) : null}
-            </Link>
+              WhatsApp Us
+            </a>
             <a
               href={telLink()}
-              className="hidden rounded-md bg-gold px-4 py-2 text-sm font-semibold text-maroon-deep shadow-sm hover:bg-gold-bright sm:inline-flex"
+              className="hidden rounded-md border border-white/20 px-4 py-2 text-sm font-semibold text-ivory hover:border-gold hover:text-gold sm:inline-flex"
             >
-              Call to Order
+              Call
             </a>
             <button
               type="button"
               className="grid h-10 w-10 place-items-center rounded-md border border-white/15 text-ivory lg:hidden"
               onClick={() => setOpen((v) => !v)}
               aria-label="Toggle menu"
+              aria-expanded={open}
             >
               {open ? "✕" : "☰"}
             </button>
@@ -87,6 +83,14 @@ export function Header() {
               ))}
               <a href={telLink()} className="py-1 text-gold">
                 Call {shop.phoneDisplay}
+              </a>
+              <a
+                href={whatsappLink()}
+                target="_blank"
+                rel="noreferrer"
+                className="py-1 text-gold"
+              >
+                WhatsApp us
               </a>
             </div>
           </nav>
